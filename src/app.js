@@ -6,6 +6,7 @@ const helmet = require('helmet')
 
 //Instancias de rutas
 const AuthRouter = require('./routes/AuthRouter')
+const UserRouter = require('./routes/UserRouter')
 
 const app = express()
 
@@ -17,5 +18,5 @@ app.use(helmet())
 
 //Rutas
 app.use('/api/v1/auth', AuthRouter)
-
+app.use('/api/v1/user', UserRouter)
 module.exports = app
