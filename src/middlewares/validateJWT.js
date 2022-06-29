@@ -11,7 +11,7 @@ const validateJWT = async (req, res, next) => {
   }
 
   try {
-    const { userId } = jwt.verify(token, process.env.SECRET_JWT_SEED)
+    const { userId } = jwt.verify(token, process.env.SECRET_JWT)
 
     const user = await User.findById(userId)
 
