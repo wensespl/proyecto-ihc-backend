@@ -2,6 +2,8 @@ const { Schema, model } = require('mongoose')
 
 const CourseSchema = Schema(
   {
+    name: { type: String, required: true },
+    tema: { type: String, required: true },
     owner: {
       type: Schema.Types.ObjectId,
       ref: 'User',
