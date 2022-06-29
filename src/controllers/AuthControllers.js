@@ -21,9 +21,12 @@ const login = async (req, res) => {
         msg: 'Password incorrect'
       })
 
+    const token = await generateJWT(user._id)
+
     res.status(200).json({
       ok: true,
-      user
+      user,
+      token
     })
   } catch (error) {
     res.status(500).json({
@@ -57,9 +60,12 @@ const register = async (req, res) => {
 
     await user.save()
 
+    const token = await generateJWT(user._id)
+
     res.status(201).json({
       ok: true,
-      user
+      user,
+      token
     })
   } catch (error) {
     res.status(500).json({
@@ -71,7 +77,7 @@ const register = async (req, res) => {
 
 const renewToken = async (req, res) => {
   const { userId, user } = req
-  // Generar JWT
+
   const token = await generateJWT(userId)
   res.json({
     ok: true,
