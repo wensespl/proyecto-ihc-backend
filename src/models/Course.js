@@ -14,7 +14,16 @@ const CourseSchema = Schema(
         type: Schema.Types.ObjectId,
         ref: 'User'
       }
-    ]
+    ],
+    contenido: {
+      type: [
+        {
+          link: String,
+          nombre: String,
+        },
+      ],
+      default: [],
+    }
   },
   { versionKey: false }
 )

@@ -70,10 +70,27 @@ const deleteCourse = async (req, res) => {
   }
 }
 
+const subirVideo = async (req, res) => {
+  try {
+    const { courseId: courseId } = req.params;
+    const course = await Course.findOneAndUpdate({ _id: courseId }, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!course) {
+      return res.status(404).json({ msg: `No course with id : ${courseId}` });
+    }
+    res.status(200).json(course);
+  } catch (error) {
+    res.status(500).json({ msg: error });
+  }
+};
+
 module.exports = {
   createCourse,
   deleteCourse,
   getAllMyCourses,
   getAllCourses,
-  getCourse
+  getCourse,
+  subirVideo
 }
