@@ -62,47 +62,56 @@ const deleteCourse = async (req, res) => {
     const { courseId: courseId } = req.params
     const course = await Course.findOneAndDelete({ _id: courseId })
     if (!course) {
-      return res.status(404).json({ msg: `No course with id : ${courseId}` })
+      return res
+        .status(404)
+        .json({ ok: false, msg: `No course with id : ${courseId}` })
     }
-    res.status(200).json(course)
+    res.status(200).json({ ok: true, course })
   } catch (error) {
-    res.status(500).json({ msg: error })
+    res.status(500).json({ ok: false, msg: error })
   }
 }
 
 const subirVideo = async (req, res) => {
   try {
-    const { courseId: courseId } = req.params;
+    const { courseId: courseId } = req.params
     const course = await Course.findOneAndUpdate({ _id: courseId }, req.body, {
       new: true,
-      runValidators: true,
-    });
+      runValidators: true
+    })
     if (!course) {
-      return res.status(404).json({ msg: `No course with id : ${courseId}` });
+      return res
+        .status(404)
+        .json({ ok: false, msg: `No course with id : ${courseId}` })
     }
-    res.status(200).json(course);
+    res.status(200).json({ ok: true, course })
   } catch (error) {
-    res.status(500).json({ msg: error });
+    res.status(500).json({ ok: false, msg: error })
   }
-};
+}
 
 const addUserToCourse = async (req, res) => {
   try {
-    const {userId} = req;
-    const {courseId} = req.body;
-    var course = await Course.findOneAndUpdate({ _id: courseId},{$push:{alumnos: userId}},{
-      new: true,
-      runValidators: true,
-    });
+    const { userId } = req
+    const { courseId } = req.body
+    var course = await Course.findOneAndUpdate(
+      { _id: courseId },
+      { $push: { alumnos: userId } },
+      {
+        new: true,
+        runValidators: true
+      }
+    )
     if (!course) {
-      return res.status(404).json({ msg: `No course with id :  ${courseId}`, ok: false } );
+      return res
+        .status(404)
+        .json({ msg: `No course with id :  ${courseId}`, ok: false })
     }
-    res.status(200).json({ok: true, course});
+    res.status(200).json({ ok: true, course })
   } catch (error) {
-    res.status(500).json({ msg: error });
+    res.status(500).json({ ok: false, msg: error })
   }
-};
-
+}
 
 module.exports = {
   addUserToCourse,

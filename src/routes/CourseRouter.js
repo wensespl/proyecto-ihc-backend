@@ -18,7 +18,7 @@ const router = Router()
 router.use(validateJWT)
 
 router.route('/').get(getAllCourses).post(createCourse)
-router.route('/user').get(getAllMyCourses).put(addUserToCourse);
+router.route('/user').get(getAllMyCourses).put(addUserToCourse)
 router.route('/:courseId').get(getCourse).delete(deleteCourse).put(subirVideo)
 
 module.exports = router
