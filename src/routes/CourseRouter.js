@@ -6,7 +6,8 @@ const {
   getAllCourses,
   getCourse,
   getAllMyCourses,
-  subirVideo
+  subirVideo,
+  addUserToCourse
 } = require('../controllers/CourseControllers')
 
 const { fieldValidator } = require('../middlewares/fieldValidator')
