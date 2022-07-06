@@ -87,38 +87,17 @@ const subirVideo = async (req, res) => {
 };
 
 const addUserToCourse = async (req, res) => {
-  console.log(req.params)
   try {
-    const { userId: userId, courseId: courseId } = req.body;
-    console.log(userId,courseId)
-    const user_temp = await User.findOne({ _id: userId });
-    if (!user_temp) {
-      return res.status(404).json({ msg: `No user with id : ${userId}` });
-    } else {
-      const course = await Course.findOne({ _id: courseId });
-      if (!course) {
-        return res.status(404);
-      } else {
-        const tutor = await User.findOne({ _id: course.id_curso });
-        let cursos = user_temp.cursos;
-        cursos.push({
-          id_curso: course._id,
-        });
-        const user = await User.findOneAndUpdate(
-          { _id: userId },
-          { cursos: cursos },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
-        if (!user) {
-          return res.status(404).json({ msg: `No user with id : ${userId}` });
-        } else {
-          res.status(202).json(user);
-        }
-      }
+    const {userId} = req;
+    const {courseId} = req.body;
+    var course = await Course.findOneAndUpdate({ _id: courseId},{$push:{alumnos: userId}},{
+      new: true,
+      runValidators: true,
+    });
+    if (!course) {
+      return res.status(404).json({ msg: `No course with id :  ${courseId}`, ok: false } );
     }
+    res.status(200).json({ok: true, course});
   } catch (error) {
     res.status(500).json({ msg: error });
   }
