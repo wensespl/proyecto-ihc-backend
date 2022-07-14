@@ -50,7 +50,9 @@ const getAllMyCourses = async (req, res) => {
 
 const getAllCourses = async (req, res) => {
   try {
-    const courses = await Course.find({})
+    const { userId } = req
+    const courses = await Course.find({ alumnos: { $nin: [userId] } })
+
     res.status(200).json({ ok: true, courses })
   } catch (error) {
     res.status(500).json({ ok: false, msg: error })
