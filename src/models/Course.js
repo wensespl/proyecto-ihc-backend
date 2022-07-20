@@ -18,22 +18,21 @@ const CourseSchema = Schema(
     contenido: {
       type: [
         {
-          link: String,
-          name: String
+          link: { type: String, required: true },
+          name: { type: String, required: true }
         }
       ],
       default: []
-    }, comentarios: {
+    },
+    comentarios: {
       type: [
         {
-          autor: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-          },
-          texto: String,
-          fecha: Date
+          autor: { type: String, required: true },
+          texto: { type: String, required: true },
+          fecha: { type: Date, required: true }
         }
-      ]
+      ],
+      default: []
     }
   },
   { versionKey: false }
