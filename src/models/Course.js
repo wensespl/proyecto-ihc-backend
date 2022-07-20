@@ -23,6 +23,17 @@ const CourseSchema = Schema(
         }
       ],
       default: []
+    }, comentarios: {
+      type: [
+        {
+          autor: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+          },
+          texto: String,
+          fecha: Date
+        }
+      ]
     }
   },
   { versionKey: false }

@@ -6,7 +6,7 @@ const {
   getAllCourses,
   getCourse,
   getAllMyCourses,
-  subirVideo,
+  actualizarCourse,
   addUserToCourse
 } = require('../controllers/CourseControllers')
 
@@ -19,6 +19,6 @@ router.use(validateJWT)
 
 router.route('/').get(getAllCourses).post(createCourse)
 router.route('/user').get(getAllMyCourses).put(addUserToCourse)
-router.route('/:courseId').get(getCourse).delete(deleteCourse).put(subirVideo)
+router.route('/:courseId').get(getCourse).delete(deleteCourse).put(actualizarCourse)
 
 module.exports = router

@@ -74,7 +74,7 @@ const deleteCourse = async (req, res) => {
   }
 }
 
-const subirVideo = async (req, res) => {
+const actualizarCourse = async (req, res) => {
   try {
     const { courseId } = req.params
     const course = await Course.findOneAndUpdate({ _id: courseId }, req.body, {
@@ -91,6 +91,7 @@ const subirVideo = async (req, res) => {
     res.status(500).json({ ok: false, msg: error })
   }
 }
+
 
 const addUserToCourse = async (req, res) => {
   try {
@@ -116,11 +117,11 @@ const addUserToCourse = async (req, res) => {
 }
 
 module.exports = {
+  actualizarCourse,
   addUserToCourse,
   createCourse,
   deleteCourse,
   getAllMyCourses,
   getAllCourses,
-  getCourse,
-  subirVideo
+  getCourse
 }
