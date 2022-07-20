@@ -19,10 +19,10 @@ const CourseSchema = Schema(
       type: [
         {
           link: String,
-          nombre: String,
-        },
+          name: String
+        }
       ],
-      default: [],
+      default: []
     }
   },
   { versionKey: false }

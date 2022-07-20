@@ -61,7 +61,7 @@ const getAllCourses = async (req, res) => {
 
 const deleteCourse = async (req, res) => {
   try {
-    const { courseId: courseId } = req.params
+    const { courseId } = req.params
     const course = await Course.findOneAndDelete({ _id: courseId })
     if (!course) {
       return res
@@ -76,7 +76,7 @@ const deleteCourse = async (req, res) => {
 
 const subirVideo = async (req, res) => {
   try {
-    const { courseId: courseId } = req.params
+    const { courseId } = req.params
     const course = await Course.findOneAndUpdate({ _id: courseId }, req.body, {
       new: true,
       runValidators: true
